@@ -36,7 +36,7 @@ Before building the microservice images and running them using Docker, you need 
 The microservices and RabbitMQ will be running in the same network, so you need to create a network first:
 
 ```bash
-docker network create microservice_net
+docker network create microservices_net
 ```
 
 ```bash

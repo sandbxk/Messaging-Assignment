@@ -20,10 +20,10 @@ public class OrderService
 
   public void Start()
   {
-    // TODO: Start listening for new orders
+    // Start listening for new orders
     _newOrderClient.ConnectAndListen(HandleNewOrder);
     
-    // TODO: Start listening for order completions
+    // Connect to the order completion topic
     _orderCompletionClient.Connect();
   }
 
@@ -35,12 +35,16 @@ public class OrderService
      * - Create the order in the database (optional)
      * - Send the order to the stock service
      */
+    
+    // Create new OrderResponseMessage
     Console.WriteLine($"Received new order from customer {order.CustomerId}");
     var orderResponse = new OrderResponseMessage
     {
         CustomerId = order.CustomerId,
         Status = "Order completed"
     };
+    
+    // Send the order completion to the customer using the customer ID as the topic
     Console.WriteLine($"Sending order completion to customer {orderResponse.CustomerId}");
     _orderCompletionClient.SendUsingTopic<OrderResponseMessage>(orderResponse,
         orderResponse.CustomerId);
