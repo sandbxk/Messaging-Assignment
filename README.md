@@ -33,6 +33,12 @@ Following services are available:
 
 Before building the microservice images and running them using Docker, you need to have a running RabbitMQ instance.
 
+The microservices and RabbitMQ will be running in the same network, so you need to create a network first:
+
+```bash
+docker network create microservice_net
+```
+
 ```bash
 docker run -d --network microservices_net --hostname rabbitmq --name rabbitmq -p 15672:15672 -p 5672:5672 rabbitmq:3.12-management
 ```
