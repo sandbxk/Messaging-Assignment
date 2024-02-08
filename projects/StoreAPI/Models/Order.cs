@@ -2,5 +2,6 @@ namespace StoreAPI.Models;
 
 public class Order
 {
-    // TODO: Add properties
+    public string CustomerId { get; set; }
+    public string Status { get; set; }
 }

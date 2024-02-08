@@ -1,6 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace OrderService.Core.Entities;
 
+[Keyless]
 public class Order
 {
-    // TODO: Add properties
+    public int OrderId { get; set; }
 }

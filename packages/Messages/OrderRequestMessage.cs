@@ -2,5 +2,6 @@
 
 public class OrderRequestMessage
 {
-    // TODO: Add properties
+    public string CustomerId { get; set; }
+    public string Status { get; set; }
 }

@@ -14,9 +14,7 @@ public class SendReceiveStrategy : MessagingStrategies.MessagingStrategy
     if(bus == null)
       throw new InvalidOperationException("You must call Connect before Send");
     
-    var source = new CancellationTokenSource(1000);
-    bus.SendReceive.Send(_queueName, message, source.Token);
-    source.Dispose();
+    bus.SendReceive.Send(_queueName, message);
   }
 
   public override IDisposable Listen<TMessage>(Action<TMessage> callback, IBus? bus)

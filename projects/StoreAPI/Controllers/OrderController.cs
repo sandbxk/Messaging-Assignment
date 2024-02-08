@@ -43,10 +43,12 @@ public class OrderController : ControllerBase
     public async Task<ActionResult<string>> PostOrder(Order order)
     {
         // TODO: Send order request to the order service
-        _orderRequestMessageClient.SendUsingQueue(new OrderRequestMessage
+        _orderRequestMessageClient.SendUsingTopic(new OrderRequestMessage
         {
-        }, "");
-        var response = await MessageWaiter.WaitForMessage(_orderResponseMessageClient, "")!;
+            CustomerId = order.CustomerId,
+            Status = "Order received."
+        }, "newOrder");
+        var response = await MessageWaiter.WaitForMessage(_orderResponseMessageClient, order.CustomerId)!;
         return response != null ? response.Status : "Order timed out.";
     }
 }

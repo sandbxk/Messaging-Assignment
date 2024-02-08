@@ -2,6 +2,7 @@ namespace Messages
 {
     public class OrderResponseMessage
     {
-        // TODO: Add properties
+        public string CustomerId { get; set; }
+        public string Status { get; set; }
     }
 }

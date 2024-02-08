@@ -21,7 +21,10 @@ public class OrderService
   public void Start()
   {
     // TODO: Start listening for new orders
+    _newOrderClient.ConnectAndListen(HandleNewOrder);
+    
     // TODO: Start listening for order completions
+    _orderCompletionClient.Connect();
   }
 
   private void HandleNewOrder(OrderRequestMessage order)
@@ -32,6 +35,15 @@ public class OrderService
      * - Create the order in the database (optional)
      * - Send the order to the stock service
      */
+    Console.WriteLine($"Received new order from customer {order.CustomerId}");
+    var orderResponse = new OrderResponseMessage
+    {
+        CustomerId = order.CustomerId,
+        Status = "Order completed"
+    };
+    Console.WriteLine($"Sending order completion to customer {orderResponse.CustomerId}");
+    _orderCompletionClient.SendUsingTopic<OrderResponseMessage>(orderResponse,
+        orderResponse.CustomerId);
   }
   
   private void HandleOrderCompletion(OrderResponseMessage order)

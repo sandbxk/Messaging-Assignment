@@ -1,16 +1,6 @@
 version: '3'
 
 services:
-    stockservice:
-        container_name: stock_service
-        environment:
-            - EASYNETQ_CONNECTION_STRING=host=rabbitmq;port=5672;virtualHost=/;username=guest;password=guest
-        build:
-            context: .
-            dockerfile: projects/StockService/Dockerfile
-        networks:
-            - microservices_net
-                
     orderservice:
         container_name: order_service
         environment:
@@ -18,16 +8,6 @@ services:
         build:
             context: .
             dockerfile: projects/OrderService/Dockerfile
-        networks:
-            - microservices_net
-
-    shippingservice:
-        container_name: shipping_service
-        environment:
-            - EASYNETQ_CONNECTION_STRING=host=rabbitmq;port=5672;virtualHost=/;username=guest;password=guest
-        build:
-            context: .
-            dockerfile: projects/ShippingService/Dockerfile
         networks:
             - microservices_net
 

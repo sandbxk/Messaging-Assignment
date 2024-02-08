@@ -14,9 +14,7 @@ public class PubSubStrategy : MessagingStrategies.MessagingStrategy
     if(bus == null)
       throw new InvalidOperationException("You must call Connect before Send");
     
-    var source = new CancellationTokenSource(1000);
-    bus.PubSub.Publish(message, source.Token);
-    source.Dispose();
+    bus.PubSub.Publish(message);
   }
 
   public override IDisposable Listen<TMessage>(Action<TMessage> callback, IBus? bus)
