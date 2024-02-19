@@ -15,21 +15,17 @@ public class ProductService
     public void PopulateDb()
     {
         // Populate the database with some products
-        _repository.Add(new Product
-        {
-        });
-        _repository.Add(new Product
-        {
-        });
-        _repository.Add(new Product
-        {
-        });
+        _repository.Add(new Product(-1, "A"));
+        _repository.Add(new Product(-1, "B"));
+        _repository.Add(new Product(-1, "C"));
+
     }
     
     public IEnumerable<Product> GetOrderProducts(int[] productIds)
     {
-        // TODO: Implement this method
-        return new List<Product>();
+        IEnumerable<Product> result = _repository.GetAll()
+            .Where(product => productIds.Contains(product.ProductID));
+        return result;
     }
     
     public IEnumerable<Product> GetProducts()

@@ -2,5 +2,12 @@ namespace StockService.Core.Entities;
 
 public class Product
 {
-    // TODO: Add properties
+    public Product(int productId, string name)
+    {
+        ProductID = productId;
+        Name = name;
+    }
+
+    public int ProductID { get; set; }
+    public string Name { get; set; }
 }
